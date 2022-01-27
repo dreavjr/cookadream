@@ -10,7 +10,7 @@ Cook-a-Dream is distributed in the hope that it will be useful, but **without an
 
 Cook-a-Dream is free software: you can redistribute it and/or modify it under the terms of the version 3 of the GNU General Public License as published by the Free Software Foundation. See the [GNU General Public License](COPYING) for more details.
 
-For acknowledgments and third-party licenses, check the file [ACKNOWLEDGMENTS.md]
+For acknowledgments and third-party licenses, check the file [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md)
 
 # 1. Installation
 
