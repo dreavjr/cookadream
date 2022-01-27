@@ -27,7 +27,7 @@ https://distill.pub/2017/feature-visualization/
 
 Feature visualization is the earnest sibling to light-hearted deep dreaming, but the implementation techniques are surprisingly similar.
 
-## In the course of of developing this program, the author found the following tutorial helpful:
+## In the course of developing this program, the author found the following tutorial helpful:
 The idea of blending the octaves with the original image was based on this example.
 
 "Deep Dream with TensorFlow: A Practical guide to build your first Deep Dream Experience" \

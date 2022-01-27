@@ -126,6 +126,8 @@ We tested Cook-a-Dream on an Ubuntu 20.04.3 server with acceleration with NVIDIA
 
 	```python cookadream/Cookadream.py```
 
+**Known issues:** Tiled rendering (which is required for rendering with the last layer of the networks) does not work with current TensorFlow / Tensor-Metal. The issue seems to be related to an [overzealous memory alignment check in TensorFlow](https://github.com/tensorflow/tensorflow/issues/49202).
+
 ### Other hardware acceleration options
 
 As of 2022-01, [ROCm support on TensorFlow is incipient](https://github.com/ROCmSoftwarePlatform/tensorflow-upstream), and, in particular, not available for Windows.
@@ -134,11 +136,31 @@ Microsoft has created [their own port of Tensorflow for DirectX](https://github.
 
 Apple does not support acceleration with  Intel or NVIDIA GPUs.
 
-## 1.2. Source installation
+## 1.3. Downloading and running the source
 
-With the dependencies installed, clone this repository on the installation location:
+With the dependencies installed, one option is to clone this repository on the installation location. Type the following commands on a shell:
 
-```git clone https://github.com/dreavjr/cookadream.git```
+```
+git clone https://github.com/dreavjr/cookadream.git
+cd cookadream
+python Cookadream.py
+```
+
+If you don't have ```git`` installed, you may download the [source from a release](https://github.com/dreavjr/cookadream/releases), and unzip / untar it on the location, using the graphical interface or one of the sequences below:
+
+```
+unzip cookadream-0.1.0.zip
+cd cookadream-0.1.0
+python Cookadream.py
+```
+
+or
+
+```
+tar xvzf cookadream-0.1.0.tar.gz
+cd cookadream-0.1.0
+python Cookadream.py
+```
 
 # 2. Running Cook-a-Dream
 
