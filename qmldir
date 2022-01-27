@@ -1,0 +1,3 @@
+Module Cookadream
+singleton Constants 1.0 Constants.qml
+singleton GlobalSettings 1.0 GlobalSettings.qml

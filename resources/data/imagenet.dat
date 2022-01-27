@@ -1,0 +1,615 @@
+1 -> kit fox
+2 -> English setter
+3 -> Siberian husky
+4 -> Australian terrier
+5 -> English springer
+6 -> grey whale
+7 -> red panda
+8 -> Egyptian cat
+9 -> ibex
+10 -> Persian cat
+11 -> mountain lion
+12 -> gazelle
+13 -> porcupine
+14 -> sea lion
+15 -> Alaskan malamute
+16 -> badger
+17 -> Great Dane
+18 -> Walker hound
+19 -> Welsh springer spaniel
+20 -> whippet
+21 -> Scottish deerhound
+22 -> orca
+23 -> mink
+24 -> African elephant
+25 -> Weimaraner
+26 -> soft-coated wheaten terrier
+27 -> Dandie Dinmont terrier
+28 -> red wolf
+29 -> Old English sheepdog
+30 -> jaguar
+31 -> otterhound
+32 -> bloodhound
+33 -> Airedale terrier
+34 -> hyena
+35 -> meerkat
+36 -> giant schnauzer
+37 -> titi monkey
+38 -> three-toed sloth
+39 -> sorrel
+40 -> black-footed ferret
+41 -> dalmatian
+42 -> black-and-tan coonhound
+43 -> papillon
+44 -> skunk
+45 -> Staffordshire bullterrier
+46 -> Mexican hairless
+47 -> Bouvier des Flandres
+48 -> weasel
+49 -> miniature poodle
+50 -> Cardigan Welsh corgi
+51 -> malinois
+52 -> bighorn
+53 -> fox squirrel
+54 -> colobus monkey
+55 -> tiger cat
+56 -> Lhasa apso
+57 -> impala
+58 -> coyote
+59 -> Yorkshire terrier
+60 -> Newfoundland dog
+61 -> brown bear
+62 -> red fox
+63 -> Norwegian elkhound
+64 -> Rottweiler
+65 -> hartebeest
+66 -> gazelle hound
+67 -> grey fox
+68 -> schipperke
+69 -> Pekingese
+70 -> Brabancon griffon
+71 -> West Highland white terrier
+72 -> Sealyham terrier
+73 -> guenon monkey
+74 -> mongoose
+75 -> indri
+76 -> tiger
+77 -> Irish wolfhound
+78 -> wild boar
+79 -> EntleBucher
+80 -> zebra
+81 -> ram, tup
+82 -> French bulldog
+83 -> orangutan
+84 -> basenji
+85 -> leopard
+86 -> Bernese mountain dog
+87 -> Maltese dog
+88 -> Norfolk terrier
+89 -> toy terrier
+90 -> Hungarian pointer
+91 -> cairn terrier
+92 -> squirrel monkey
+93 -> groenendael
+94 -> clumber
+95 -> Siamese cat
+96 -> chimpanzee
+97 -> komondor
+98 -> Afghan hound
+99 -> Japanese spaniel
+100 -> proboscis monkey
+101 -> guinea pig
+102 -> white wolf
+103 -> ice bear
+104 -> gorilla
+105 -> borzoi
+106 -> toy poodle
+107 -> Kerry blue terrier
+108 -> ox
+109 -> Scotch terrier
+110 -> Tibetan mastiff
+111 -> spider monkey
+112 -> Doberman
+113 -> Boston bull
+114 -> Greater Swiss Mountain dog
+115 -> Appenzeller
+116 -> Shih-Tzu
+117 -> Irish water spaniel
+118 -> Pomeranian
+119 -> Bedlington terrier
+120 -> warthog
+121 -> Arabian camel
+122 -> siamang
+123 -> miniature schnauzer
+124 -> collie
+125 -> golden retriever
+126 -> Irish terrier
+127 -> affenpinscher
+128 -> Border collie
+129 -> hare
+130 -> boxer
+131 -> silky terrier
+132 -> beagle
+133 -> Leonberg
+134 -> German short-haired pointer
+135 -> patas
+136 -> dhole
+137 -> baboon
+138 -> macaque
+139 -> Chesapeake Bay retriever
+140 -> bull mastiff
+141 -> kuvasz
+142 -> capuchin
+143 -> pug
+144 -> curly-coated retriever
+145 -> Norwich terrier
+146 -> flat-coated retriever
+147 -> hog
+148 -> keeshond
+149 -> Eskimo dog
+150 -> Brittany spaniel
+151 -> standard poodle
+152 -> Lakeland terrier
+153 -> snow leopard
+154 -> Gordon setter
+155 -> dingo
+156 -> standard schnauzer
+157 -> hamster
+158 -> Tibetan terrier
+159 -> Arctic fox
+160 -> wire-haired fox terrier
+161 -> basset
+162 -> water buffalo
+163 -> black bear
+164 -> Angora rabbit
+165 -> bison
+166 -> howler monkey
+167 -> hippopotamus
+168 -> chow
+169 -> giant panda
+170 -> pit bull terrier
+171 -> Shetland sheepdog
+172 -> Great Pyrenees
+173 -> Chihuahua
+174 -> tabby cat
+175 -> marmoset
+176 -> Labrador retriever
+177 -> Saint Bernard
+178 -> armadillo
+179 -> Samoyed
+180 -> bluetick
+181 -> redbone
+182 -> polecat
+183 -> marmot
+184 -> kelpie
+185 -> gibbon
+186 -> llama
+187 -> miniature pinscher
+188 -> wood rabbit
+189 -> Italian greyhound
+190 -> lion
+191 -> cocker spaniel
+192 -> Irish setter
+193 -> dugong
+194 -> Indian elephant
+195 -> beaver
+196 -> Sussex spaniel
+197 -> Pembroke Welsh corgi
+198 -> Blenheim spaniel
+199 -> ring-tailed lemur
+200 -> Rhodesian ridgeback
+201 -> lynx
+202 -> African hunting dog
+203 -> langur
+204 -> Ibizan hound
+205 -> timber wolf
+206 -> cheetah
+207 -> English foxhound
+208 -> briard
+209 -> sloth bear
+210 -> Border terrier
+211 -> German shepherd
+212 -> otter
+213 -> koala
+214 -> tusker
+215 -> echidna
+216 -> wallaby
+217 -> platypus
+218 -> wombat
+219 -> revolver
+220 -> umbrella
+221 -> schooner
+222 -> soccer ball
+223 -> accordion
+224 -> ant
+225 -> starfish
+226 -> chambered nautilus
+227 -> grand piano
+228 -> laptop computer
+229 -> strawberry
+230 -> airliner
+231 -> military plane
+232 -> airship
+233 -> balloon
+234 -> space shuttle
+235 -> fireboat
+236 -> gondola
+237 -> speedboat
+238 -> lifeboat
+239 -> canoe
+240 -> yawl
+241 -> catamaran
+242 -> trimaran
+243 -> container ship
+244 -> ocean liner
+245 -> pirate ship
+246 -> aircraft carrier
+247 -> submarine
+248 -> wreck
+249 -> half track
+250 -> army tank
+251 -> missile
+252 -> bobsled
+253 -> dogsled
+254 -> tandem bicycle
+255 -> mountain bike
+256 -> freight car
+257 -> passenger car
+258 -> wheelbarrow
+259 -> shopping cart
+260 -> motor scooter
+261 -> forklift
+262 -> electric locomotive
+263 -> steam locomotive
+264 -> amphibious vehicle
+265 -> ambulance
+266 -> station wagon
+267 -> taxicab
+268 -> convertible
+269 -> landrover
+270 -> limousine
+271 -> minivan
+272 -> Model T
+273 -> racing car
+274 -> sports car
+275 -> go-kart
+276 -> golfcart
+277 -> moped
+278 -> snowplow
+279 -> fire truck
+280 -> garbage truck
+281 -> pickup truck
+282 -> tow truck
+283 -> trailer truck
+284 -> moving van
+285 -> police van
+286 -> recreational vehicle
+287 -> streetcar
+288 -> snowmobile
+289 -> tractor
+290 -> mobile home
+291 -> tricycle
+292 -> unicycle
+293 -> horse cart
+294 -> rickshaw
+295 -> oxcart
+296 -> bassinet
+297 -> cradle
+298 -> crib
+299 -> four-poster
+300 -> bookcase
+301 -> china cabinet
+302 -> medicine cabinet
+303 -> commode
+304 -> table lamp
+305 -> file cabinet
+306 -> park bench
+307 -> barber chair
+308 -> throne
+309 -> folding chair
+310 -> rocking chair
+311 -> studio couch
+312 -> toilet seat
+313 -> desk
+314 -> pool table
+315 -> dining table
+316 -> entertainment center
+317 -> wardrobe
+318 -> Granny Smith
+319 -> orange
+320 -> lemon
+321 -> fig
+322 -> pineapple
+323 -> banana
+324 -> jackfruit
+325 -> custard apple
+326 -> pomegranate
+327 -> acorn
+328 -> rosehip
+329 -> spike
+330 -> rapeseed
+331 -> corn
+332 -> buckeye
+333 -> pipe organ
+334 -> upright piano
+335 -> bell
+336 -> drum
+337 -> gong
+338 -> maraca
+339 -> marimba, xylophone
+340 -> steel drum
+341 -> banjo
+342 -> cello
+343 -> violin
+344 -> harp
+345 -> acoustic guitar
+346 -> electric guitar
+347 -> horn, trumpet
+348 -> French horn
+349 -> trombone
+350 -> harmonica
+351 -> ocarina
+352 -> panpipe
+353 -> bassoon
+354 -> oboe
+355 -> saxophone
+356 -> flute
+357 -> daisy
+358 -> yellow lady-slipper
+359 -> cliff
+360 -> valley
+361 -> alp
+362 -> volcano
+363 -> headland
+364 -> sandbar
+365 -> coral reef
+366 -> lakeside
+367 -> seashore
+368 -> geyser
+369 -> hatchet
+370 -> meat cleaver
+371 -> letter opener
+372 -> carpenter's plane
+373 -> power drill
+374 -> lawn mower
+375 -> hammer
+376 -> corkscrew
+377 -> can opener
+378 -> plumber's helper
+379 -> screwdriver
+380 -> shovel
+381 -> plow
+382 -> chain saw
+383 -> rooster
+384 -> hen
+385 -> ostrich
+386 -> brambling
+387 -> goldfinch
+388 -> house finch
+389 -> snowbird
+390 -> indigo bunting
+391 -> American robin
+392 -> bulbul
+393 -> jay
+394 -> magpie
+395 -> chickadee
+396 -> dipper
+397 -> kite
+398 -> bald eagle
+399 -> vulture
+400 -> great grey owl
+401 -> black grouse
+402 -> ptarmigan
+403 -> partridge
+404 -> prairie fowl
+405 -> peacock
+406 -> quail
+407 -> partridge
+408 -> African gray
+409 -> macaw
+410 -> sulphur-crested cockatoo
+411 -> lorikeet
+412 -> coucal
+413 -> bee eater
+414 -> hornbill
+415 -> hummingbird
+416 -> jacamar
+417 -> toucan
+418 -> drake
+419 -> red-breasted merganser
+420 -> goose
+421 -> black swan
+422 -> white stork
+423 -> black stork
+424 -> spoonbill
+425 -> flamingo
+426 -> American egret
+427 -> little blue heron
+428 -> bittern
+429 -> crane
+430 -> limpkin, Aramus pictus
+431 -> American coot
+432 -> bustard
+433 -> ruddy turnstone
+434 -> red-backed sandpiper
+435 -> redshank
+436 -> dowitcher
+437 -> oystercatcher
+438 -> European gallinule
+439 -> pelican
+440 -> king penguin
+441 -> albatross
+442 -> great white shark
+443 -> tiger shark
+444 -> hammerhead
+445 -> electric ray
+446 -> stingray
+447 -> barracouta
+448 -> silver salmon
+449 -> tench
+450 -> goldfish
+451 -> eel
+452 -> rock beauty
+453 -> anemone fish
+454 -> lionfish
+455 -> puffer
+456 -> sturgeon
+457 -> garfish
+458 -> loggerhead
+459 -> leatherback turtle
+460 -> mud turtle
+461 -> terrapin
+462 -> box turtle
+463 -> banded gecko
+464 -> common iguana
+465 -> American chameleon
+466 -> whiptail
+467 -> agama
+468 -> frilled lizard
+469 -> alligator lizard
+470 -> Gila monster
+471 -> green lizard
+472 -> African chameleon
+473 -> Komodo dragon
+474 -> triceratops
+475 -> African crocodile
+476 -> American alligator
+477 -> thunder snake
+478 -> ringneck snake
+479 -> hognose snake
+480 -> green snake
+481 -> king snake
+482 -> garter snake
+483 -> water snake
+484 -> vine snake
+485 -> night snake
+486 -> boa constrictor
+487 -> rock python
+488 -> Indian cobra
+489 -> green mamba
+490 -> sea snake
+491 -> horned viper
+492 -> diamondback
+493 -> sidewinder
+494 -> European fire salamander
+495 -> common newt
+496 -> eft
+497 -> spotted salamander
+498 -> axolotl
+499 -> bullfrog
+500 -> tree frog
+501 -> tailed frog
+502 -> whistle
+503 -> wing
+504 -> paintbrush
+505 -> hand blower
+506 -> oxygen mask
+507 -> snorkel
+508 -> loudspeaker
+509 -> microphone
+510 -> screen
+511 -> mouse
+512 -> electric fan
+513 -> oil filter
+514 -> strainer
+515 -> space heater
+516 -> stove
+517 -> guillotine
+518 -> barometer
+519 -> ruler
+520 -> odometer
+521 -> scale
+522 -> analog clock
+523 -> digital clock
+524 -> wall clock
+525 -> hourglass
+526 -> sundial
+527 -> parking meter
+528 -> stopwatch
+529 -> digital watch
+530 -> stethoscope
+531 -> syringe
+532 -> magnetic compass
+533 -> binoculars
+534 -> projector
+535 -> sunglasses
+536 -> jeweler's loupe
+537 -> radio telescope
+538 -> bow
+539 -> cannon
+540 -> assault rifle
+541 -> rifle
+542 -> projectile
+543 -> computer keyboard
+544 -> typewriter keyboard
+545 -> crane
+546 -> lighter
+547 -> abacus
+548 -> cash dispenser, ATM
+549 -> slide rule, slipstick
+550 -> desktop computer
+551 -> hand-held computer
+552 -> notebook computer
+553 -> website
+554 -> harvester
+555 -> thrasher
+556 -> printer
+557 -> slot machine
+558 -> vending machine
+559 -> sewing machine
+560 -> joystick
+561 -> electric switch
+562 -> hook, claw
+563 -> car wheel
+564 -> paddlewheel
+565 -> pinwheel
+566 -> potter's wheel
+567 -> gas pump
+568 -> merry-go-round
+569 -> swing
+570 -> reel
+571 -> radiator
+572 -> hockey puck
+573 -> hard disc
+574 -> sunglass
+575 -> pick, plectrum
+576 -> car mirror
+577 -> solar dish
+578 -> remote control
+579 -> disk brake
+580 -> buckle
+581 -> hair slide
+582 -> knot
+583 -> combination lock
+584 -> padlock
+585 -> nail
+586 -> safety pin
+587 -> screw
+588 -> muzzle
+589 -> seat belt
+590 -> ski
+591 -> candle
+592 -> jack-o'-lantern
+593 -> spotlight, spot
+594 -> torch
+595 -> neck brace
+596 -> pier
+597 -> tripod
+598 -> maypole
+599 -> mousetrap
+600 -> spider web
+601 -> trilobite
+602 -> harvestman
+603 -> scorpion
+604 -> black and gold garden spider
+605 -> barn spider
+606 -> garden spider
+607 -> black widow
+608 -> tarantula
+609 -> wolf spider
+610 -> tick
+611 -> centipede
+612 -> isopod
+613 -> Dungeness crab
+614 -> rock crab
+615 -> fiddler crab

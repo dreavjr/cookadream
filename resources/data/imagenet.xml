@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<imagenet_classes>
+  <imagenet_class>
+    <imagenet_id>0</imagenet_id>
+    <imagenet_name>all at once</imagenet_name>
+    <keras_id>-1</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>223</imagenet_id>
+    <imagenet_name>accordion</imagenet_name>
+    <keras_id>401</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>744</imagenet_id>
+    <imagenet_name>artichoke</imagenet_name>
+    <keras_id>944</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>300</imagenet_id>
+    <imagenet_name>bookcase</imagenet_name>
+    <keras_id>453</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>174</imagenet_id>
+    <imagenet_name>cat, tabby</imagenet_name>
+    <keras_id>281</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>738</imagenet_id>
+    <imagenet_name>cauliflower</imagenet_name>
+    <keras_id>938</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>522</imagenet_id>
+    <imagenet_name>clock, analog</imagenet_name>
+    <keras_id>409</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>523</imagenet_id>
+    <imagenet_name>clock, digital</imagenet_name>
+    <keras_id>530</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>365</imagenet_id>
+    <imagenet_name>coral reef</imagenet_name>
+    <keras_id>973</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>376</imagenet_id>
+    <imagenet_name>corkscrew</imagenet_name>
+    <keras_id>512</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>254</imagenet_id>
+    <imagenet_name>cycle, tandem bike</imagenet_name>
+    <keras_id>444</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>291</imagenet_id>
+    <imagenet_name>cycle, tricycle</imagenet_name>
+    <keras_id>870</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>292</imagenet_id>
+    <imagenet_name>cycle, unicycle</imagenet_name>
+    <keras_id>880</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>173</imagenet_id>
+    <imagenet_name>dog, Chihuahua</imagenet_name>
+    <keras_id>151</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>41</imagenet_id>
+    <imagenet_name>dog, dalmatian</imagenet_name>
+    <keras_id>251</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>3</imagenet_id>
+    <imagenet_name>dog, Siberian husky</imagenet_name>
+    <keras_id>250</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>24</imagenet_id>
+    <imagenet_name>elephant, African</imagenet_name>
+    <keras_id>386</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>450</imagenet_id>
+    <imagenet_name>goldfish</imagenet_name>
+    <keras_id>1</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>813</imagenet_id>
+    <imagenet_name>guacamole</imagenet_name>
+    <keras_id>924</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>730</imagenet_id>
+    <imagenet_name>honeycomb</imagenet_name>
+    <keras_id>599</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>415</imagenet_id>
+    <imagenet_name>hummingbird</imagenet_name>
+    <keras_id>94</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>592</imagenet_id>
+    <imagenet_name>jack-o'-lantern</imagenet_name>
+    <keras_id>607</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>324</imagenet_id>
+    <imagenet_name>jackfruit</imagenet_name>
+    <keras_id>955</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>543</imagenet_id>
+    <imagenet_name>keyboard, computer</imagenet_name>
+    <keras_id>508</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>473</imagenet_id>
+    <imagenet_name>Komodo dragon</imagenet_name>
+    <keras_id>48</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>622</imagenet_id>
+    <imagenet_name>ladybug</imagenet_name>
+    <keras_id>301</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>190</imagenet_id>
+    <imagenet_name>lion</imagenet_name>
+    <keras_id>291</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>746</imagenet_id>
+    <imagenet_name>mushroom</imagenet_name>
+    <keras_id>947</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>354</imagenet_id>
+    <imagenet_name>oboe</imagenet_name>
+    <keras_id>683</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>520</imagenet_id>
+    <imagenet_name>odometer</imagenet_name>
+    <keras_id>685</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>295</imagenet_id>
+    <imagenet_name>oxcart</imagenet_name>
+    <keras_id>690</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>169</imagenet_id>
+    <imagenet_name>panda, giant</imagenet_name>
+    <keras_id>388</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>43</imagenet_id>
+    <imagenet_name>papillon</imagenet_name>
+    <keras_id>157</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>440</imagenet_id>
+    <imagenet_name>penguin, king</imagenet_name>
+    <keras_id>145</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>227</imagenet_id>
+    <imagenet_name>piano, grand</imagenet_name>
+    <keras_id>579</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>948</imagenet_id>
+    <imagenet_name>pizza</imagenet_name>
+    <keras_id>963</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>217</imagenet_id>
+    <imagenet_name>platypus</imagenet_name>
+    <keras_id>103</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>952</imagenet_id>
+    <imagenet_name>saltshaker</imagenet_name>
+    <keras_id>773</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>355</imagenet_id>
+    <imagenet_name>saxophone</imagenet_name>
+    <keras_id>776</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>521</imagenet_id>
+    <imagenet_name>scale</imagenet_name>
+    <keras_id>778</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>14</imagenet_id>
+    <imagenet_name>sea lion</imagenet_name>
+    <keras_id>150</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>367</imagenet_id>
+    <imagenet_name>seashore</imagenet_name>
+    <keras_id>978</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>442</imagenet_id>
+    <imagenet_name>shark, great white</imagenet_name>
+    <keras_id>2</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>486</imagenet_id>
+    <imagenet_name>snake, constrictor</imagenet_name>
+    <keras_id>61</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>508</imagenet_id>
+    <imagenet_name>speaker</imagenet_name>
+    <keras_id>632</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>600</imagenet_id>
+    <imagenet_name>spider web</imagenet_name>
+    <keras_id>815</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>786</imagenet_id>
+    <imagenet_name>teddy bear</imagenet_name>
+    <keras_id>850</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>959</imagenet_id>
+    <imagenet_name>telephone, dial</imagenet_name>
+    <keras_id>528</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>76</imagenet_id>
+    <imagenet_name>tiger</imagenet_name>
+    <keras_id>292</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>417</imagenet_id>
+    <imagenet_name>toucan</imagenet_name>
+    <keras_id>96</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>861</imagenet_id>
+    <imagenet_name>traffic light</imagenet_name>
+    <keras_id>920</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>474</imagenet_id>
+    <imagenet_name>triceratops</imagenet_name>
+    <keras_id>51</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>459</imagenet_id>
+    <imagenet_name>turtle, leatherback</imagenet_name>
+    <keras_id>34</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>362</imagenet_id>
+    <imagenet_name>volcano</imagenet_name>
+    <keras_id>980</keras_id>
+  </imagenet_class>
+  <imagenet_class>
+    <imagenet_id>258</imagenet_id>
+    <imagenet_name>wheelbarrow</imagenet_name>
+    <keras_id>428</keras_id>
+  </imagenet_class>
+</imagenet_classes>

@@ -1,0 +1,17 @@
+# When running remotely on Ubuntu 20.04 via SSH -Y I encountered several errors that these configurations solve.
+# usage: source x11.environ
+
+# The error "libGL error: failed to load driver: swrast" can be fixed with:
+# apt-get install mesa-utils libgl1-mesa-glx
+
+# The error "libGL error: No matching fbConfigs or visuals found" can be fixed with:
+export LIBGL_ALWAYS_INDIRECT=1
+
+# An workaround for the error "QRhiGles2: Failed to create temporary context" is:
+export QT_QUICK_BACKEND=software
+
+# "XDG_RUNTIME_DIR not set, defaulting to '...'" is just a warning and can be ignored
+
+# Sources:
+# https://unix.stackexchange.com/questions/589236/libgl-error-no-matching-fbconfigs-or-visuals-found-glxgears-error-docker-cu
+# https://stackoverflow.com/questions/69049171/how-to-fix-libgl-error-in-qt5-qml-gui-launched-from-docker-on-
