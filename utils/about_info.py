@@ -1,62 +1,26 @@
-# ======================================================================================================================
-# Copyright 2022 Eduardo Valle.
-#
-# This file is part of Cook-a-Dream.
-#
-# Cook-a-Dream is free software: you can redistribute it and/or modify it under the terms of the version 3 of the GNU
-# General Public License as published by the Free Software Foundation.
-#
-# Cook-a-Dream is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with Cook-a-Dream. If not, see
-# https://www.gnu.org/licenses.
-# ======================================================================================================================
-import sys
-from pathlib import Path
-
 import pkg_resources
-from PySide6.QtCore import Property, QMimeData, QObject, QSysInfo, Signal, Slot
-from PySide6.QtGui import QFontDatabase
-from PySide6.QtQml import QmlElement, QQmlApplicationEngine
-from PySide6.QtQuickControls2 import QQuickStyle
-from PySide6.QtWidgets import QApplication
 
-import style_rc  # pylint: disable=unused-import
-from version_info import PRODUCT_COMMIT, PRODUCT_VERSION
+from PySide6.QtCore import (Property, QMimeData, QObject, QSysInfo, Signal, Slot)
+from PySide6.QtQml import QmlElement
 
-dialogDisclaimers = len(sys.argv) > 1 and sys.argv[1].lower().startswith('disc')
+from .version_info import PRODUCT_COMMIT, PRODUCT_VERSION
 
-app = QApplication(sys.argv)
+appName = None
+textDir = None
+clipboard = None
 
-appName = 'About'
-app.setOrganizationName('eduardovalle.com')
-app.setOrganizationDomain('tests.eduardovalle.com')
-app.setApplicationName(appName)
-app.setApplicationVersion('0.1')
+def configureAboutInfo(applicationObject, textDirPathObject):
+    global appName, textDir, clipboard
+    appName = applicationObject.applicationName()
+    textDir = textDirPathObject
+    clipboard = applicationObject.clipboard()
 
-
-# Application resources
-applicationPath = Path(__file__).resolve(strict=True)
-# imagesDir = applicationPath.parent / 'resources' / 'images'
-applicationPath = Path(__file__).resolve(strict=True)
-imagesDir = applicationPath.parent / 'resources' / 'images'
-fontsDir = applicationPath.parent / 'resources' / 'fonts'
-dataDir = applicationPath.parent / 'resources' / 'data'
-textDir = applicationPath.parent / 'resources' / 'text'
-
-# Load fonts
-for typeface in ("Roboto-Regular.ttf", "Roboto-Italic.ttf", "Roboto-Medium.ttf", "Roboto-MediumItalic.ttf",
-                 "Roboto-Bold.ttf", "Roboto-BoldItalic.ttf",):
-    fontPath = str(fontsDir / typeface)
-    QFontDatabase.addApplicationFont(fontPath)
+# --- Python-QML bridge element for about window
 
 # To be used on the @QmlElement decorator
 QML_IMPORT_NAME = 'cookadream.aboutinfo'
 QML_IMPORT_MAJOR_VERSION = 1
 QML_IMPORT_MINOR_VERSION = 0
-
-clipboard = app.clipboard()
 
 @QmlElement
 class AboutInfo(QObject):
@@ -254,37 +218,3 @@ class AboutInfo(QObject):
                              for packageName, packageLicense, packageHomepage in packagesData]
             formattedData = '\n'.join(formattedData) + '\n'
         return formattedData
-
-
-PLATFORM_SYSTEM = QSysInfo.kernelType()
-PLATFORM_MACOS = PLATFORM_SYSTEM == 'darwin'
-PLATFORM_MENUS = PLATFORM_MACOS
-
-if __name__ == '__main__':
-    controlsTheme = 'Material' if PLATFORM_MACOS else 'Universal'
-    QQuickStyle.setStyle(controlsTheme)
-    engine = QQmlApplicationEngine()
-    print('theme = "%s", engine = %s' % (controlsTheme, engine))
-
-    # Adds global symbols to QML
-    rootContext = engine.rootContext()
-    imagesUri = imagesDir.as_uri()
-    rootContext.setContextProperty('IMAGES_URI', imagesUri)
-    dataUri = dataDir.as_uri()
-    rootContext.setContextProperty('DATA_URI', dataUri)
-    rootContext.setContextProperty('CONTROLS_THEME', controlsTheme)
-    rootContext.setContextProperty('DIALOG_DEBUG', True)
-    print('-- global symbols created')
-
-    if dialogDisclaimers:
-        qml_path = Path(__file__).parent / 'Disclaimers.qml'
-    else:
-        qml_path = Path(__file__).parent / 'About.qml'
-    engine.load(qml_path)
-    if not engine.rootObjects():
-        sys.exit(-1)
-    result = app.exec()
-
-    if result != 0:
-        print('ERROR: program exitted with code:', result)
-        sys.exit(result)

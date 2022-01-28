@@ -1,0 +1,5 @@
+# Expected during development but not strictly required
+pylint
+# Required for utils/prepare_imagenet_data.py, not necessary if not changing resources/data/imagenet.xml
+pandas
+scipy

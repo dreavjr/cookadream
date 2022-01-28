@@ -21,7 +21,7 @@ from pathlib import Path, PurePath
 from PySide6.QtGui import QFontDatabase, QIcon, QKeySequence, QPixmap
 from PySide6.QtWidgets import QApplication, QSplashScreen
 
-from version_info import PRODUCT_VERSION, PRODUCT_COMMIT
+from utils.version_info import PRODUCT_VERSION
 
 appName = 'Cook-a-Dream'
 app = QApplication(sys.argv)
@@ -38,6 +38,7 @@ fontsDir = applicationDir / 'resources' / 'fonts'
 dataDir = applicationDir / 'resources' / 'data'
 textDir = applicationDir / 'resources' / 'text'
 examplesDir = applicationDir / 'resources' / 'examples'
+qmlDir = applicationDir / 'gui'
 
 # Application appearance
 app.setWindowIcon(QIcon(str(imagesDir / 'application_icon.png')))
@@ -63,21 +64,20 @@ splashShow('loading ui framework')
 # --- Remaining imports
 import atexit
 import inspect
+import logging
 import os
 import re
 import tempfile
 import traceback
 from datetime import datetime
 
-import logging
-import pkg_resources
-from PySide6.QtCore import (Property, QMimeData, QMutex, QObject, QRunnable, QSettings, QStandardPaths, QSysInfo, Qt,
-                            QThreadPool, QtMsgType, QUrl, QWaitCondition, Signal, Slot, qInstallMessageHandler)
+from PySide6.QtCore import (Property, QMutex, QObject, QRunnable, QSettings, QStandardPaths, QSysInfo, Qt, QThreadPool,
+                            QtMsgType, QUrl, QWaitCondition, Signal, Slot, qInstallMessageHandler)
 from PySide6.QtQml import QmlElement, QQmlApplicationEngine
 from PySide6.QtQuick import QQuickImageProvider, QQuickItem
 from PySide6.QtQuickControls2 import QQuickStyle
 
-import style_rc  # pylint: disable=unused-import
+from utils import style_rc  # pylint: disable=unused-import
 
 LOG_ERROR_LEVELS = ('debug', 'info', 'warning', 'error')
 LOG_ERROR_LEVELS_PYTHON = tuple((getattr(logging, l.upper()) for l in LOG_ERROR_LEVELS))
@@ -244,6 +244,11 @@ class DreamEngineInfo(QObject):
 
 # --- Multithreading infra-structure
 splashShow('initializing ui')
+
+from utils import about_info
+
+about_info.configureAboutInfo(applicationObject=app, textDirPathObject=textDir)
+
 
 # To be used on the @QmlElement decorator
 QML_IMPORT_NAME = 'cookadream.mainwindow'
@@ -862,210 +867,6 @@ class NeuralImageBridge(QQuickImageProvider):
 
 neuralImageBridge = NeuralImageBridge()
 
-# --- Python-QML bridge element for about window
-
-# To be used on the @QmlElement decorator
-QML_IMPORT_NAME = 'cookadream.aboutinfo'
-QML_IMPORT_MAJOR_VERSION = 1
-QML_IMPORT_MINOR_VERSION = 0
-
-@QmlElement
-class AboutInfo(QObject):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._licenseText = None
-        self._licensePlainText = None
-        self._disclaimersText = None
-        self._disclaimersPlainText = None
-        self._locale = ''
-        self._packagesData = self.getPackagesData()
-        self._packagesDataText = self.formatPackagesData(self._packagesData, html=True)
-        self._packagesDataPlainText = self.formatPackagesData(self._packagesData, html=False)
-        self._localeSet('enUS')
-
-    def _loadLicenseTexts(self):
-        aboutTextPath = textDir / f'ABOUT_{self.locale}.html'
-        with open(aboutTextPath, 'rt', encoding='utf-8') as aboutTextFile:
-            aboutText = aboutTextFile.read()
-        aboutTextPath = textDir / f'ABOUT_{self.locale}.md'
-        with open(aboutTextPath, 'rt', encoding='utf-8') as aboutTextFile:
-            aboutPlainText = aboutTextFile.read()
-        aboutText = aboutText.replace('[[[PACKAGES_DATA]]]', self._packagesDataText)
-        self._licenseText = aboutText
-        aboutPlainText = aboutPlainText.replace('[[[PACKAGES_DATA]]]', self._packagesDataPlainText)
-        self._licensePlainText = aboutPlainText
-
-    def _loadDisclaimersTexts(self):
-        disclaimersTextPath = textDir / f'DISCLAIMERS_{self.locale}.html'
-        with open(disclaimersTextPath, 'rt', encoding='utf-8') as disclaimersTextFile:
-            disclaimersText = disclaimersTextFile.read()
-        disclaimersTextPath = textDir / f'DISCLAIMERS_{self.locale}.md'
-        with open(disclaimersTextPath, 'rt', encoding='utf-8') as disclaimersTextFile:
-            disclaimersPlainText = disclaimersTextFile.read()
-        self._disclaimersText = disclaimersText
-        self._disclaimersPlainText = disclaimersPlainText
-
-    @Slot()
-    def _refresh(self):
-        self._loadLicenseTexts()
-        self.licenseTextChanged.emit()
-        self.licensePlainTextChanged.emit()
-        self._loadDisclaimersTexts()
-        self.licensePlainTextChanged.emit()
-        self.disclaimersTextChanged.emit()
-
-    # --- Property .licenseText (read-only, protected write)
-    licenseTextChanged = Signal(name='licenseTextChanged')
-
-    def licenseTextGet(self):
-        if self._licenseText is None:
-            self._loadLicenseTexts()
-        return self._licenseText
-
-    licenseText = Property(str, licenseTextGet, notify=licenseTextChanged)
-
-    # --- Property .licensePlainText (read-only, protected write)
-    licensePlainTextChanged = Signal(name='licensePlainTextChanged')
-
-    def licensePlainTextGet(self):
-        if self._licensePlainText is None:
-            self._loadLicenseTexts()
-        return self._licensePlainText
-
-    licensePlainText = Property(str, licensePlainTextGet, notify=licensePlainTextChanged)
-
-    # --- Property .ready (read-only, protected write)
-    disclaimersTextChanged = Signal(name='disclaimersTextChanged')
-
-    def disclaimersTextGet(self):
-        if self._disclaimersText is None:
-            self._loadDisclaimersTexts()
-        return self._disclaimersText
-
-    def _disclaimersTextSet(self, disclaimersText):
-        if self._disclaimersText != disclaimersText:
-            self._disclaimersText = disclaimersText
-            self.disclaimersTextChanged.emit()
-
-    disclaimersText = Property(str, disclaimersTextGet, notify=disclaimersTextChanged)
-
-    # --- Property .ready (read-only, protected write)
-    disclaimersPlainTextChanged = Signal(name='disclaimersPlainTextChanged')
-
-    def disclaimersPlainTextGet(self):
-        if self._disclaimersPlainText is None:
-            self._loadDisclaimersTexts()
-        return self._disclaimersPlainText
-
-    disclaimersPlainText = Property(str, disclaimersPlainTextGet, notify=disclaimersPlainTextChanged)
-
-    # --- Property .locale (read-only, protected write)
-    localeChanged = Signal(name='localeChanged')
-
-    def localeGet(self):
-        return self._locale
-
-    def _localeSet(self, locale):
-        if self._locale != locale:
-            self._locale = locale
-            self.localeChanged.emit()
-            if self._licenseText is not None:
-                self._loadLicenseTexts()
-                self._licenseTextChanged.emit()
-                self._licensePlainTextChanged.emit()
-            if self._disclaimersText is not None:
-                self._loadDisclaimersTexts()
-                self._disclaimersTextChanged.emit()
-                self._disclaimersPlainTextChanged.emit()
-
-    locale = Property(str, localeGet, notify=localeChanged)
-
-    # --- Version Info
-    @Property(str, constant=True)
-    def version(self):
-        return PRODUCT_VERSION
-
-    @Property(str, constant=True)
-    def commit(self):
-        return PRODUCT_COMMIT
-
-    # --- System Info
-    @Property(str, constant=True)
-    def sysinfo(self):
-        sysinfo = (QSysInfo.buildAbi(), QSysInfo.currentCpuArchitecture(), QSysInfo.kernelType(),
-                   QSysInfo.kernelVersion(), QSysInfo.productType(), QSysInfo.productVersion())
-        return '; '.join(sysinfo)
-
-    # --- Slots for copying data
-    @Slot()
-    def copyLicense(self):
-        mimeData = QMimeData()
-        mimeData.setHtml(self.licenseText)
-        mimeData.setText(self.licensePlainText)
-        clipboard.setMimeData(mimeData)
-
-    @Slot()
-    def copyInfo(self):
-        info = f'{appName}\nVersion: {self.version}\nCommit: {self.commit}\nSysInfo: {self.sysinfo}'
-        clipboard.setText(info)
-
-    # --- Ancillary routines for getting installed packages licenses
-    @staticmethod
-    def getPackageData(package):
-        # https://packaging.python.org/en/latest/specifications/core-metadata/
-        # https://pypi.org/classifiers/
-        metadata = package.get_metadata_lines('METADATA')
-        # metadata = package.get_metadata_lines('PKG-INFO')
-        packageLicense = ''
-        packageClassifierLicense = ''
-        packageHomepage = ''
-        for m in metadata:
-            key = m.lower()
-            if key.startswith('license:'):
-                packageLicense =  m[8:].strip()
-            elif key.startswith('home-page:'):
-                packageHomepage =  m[10:].strip()
-            elif key.startswith('classifier: license ::'):
-                packageClassifierLicense =  m[22:].strip()
-            if packageClassifierLicense and packageHomepage:
-                break
-        if packageLicense.lower() == 'unknown':
-            packageLicense = ''
-        if packageHomepage.lower() == 'unknown':
-            packageHomepage = ''
-        if packageClassifierLicense:
-            packageLicense = packageClassifierLicense
-        if packageLicense.lower().startswith('osi approved ::'):
-            packageLicenseWithoutPrefix = packageLicense[15:].strip()
-            if len(packageLicenseWithoutPrefix) >= 3:
-                packageLicense = packageLicenseWithoutPrefix
-        return packageLicense, packageHomepage
-
-    @classmethod
-    def getPackagesData(cls):
-        packages = pkg_resources.working_set
-        packages = sorted(packages, key=lambda p: str(p).lower())
-        packagesData = []
-        for p in packages:
-            packageLicense, packageHomepage = cls.getPackageData(p)
-            packageName = str(p)
-            packagesData.append((packageName, packageLicense, packageHomepage,))
-        return packagesData
-
-    @staticmethod
-    def formatPackagesData(packagesData, html=False):
-        if html:
-            formattedData = [f'    <li><b>{packageName}:</b> License: {packageLicense}, '
-                             f'<a style="text-decoration:none" href="{packageHomepage}">{packageHomepage}</a></li>'
-                             for packageName, packageLicense, packageHomepage in packagesData]
-            formattedData = '      <ul>\n        ' + '\n        '.join(formattedData) + '\n      </ul>\n'
-        else:
-            formattedData = [f'- {packageName}: License: {packageLicense}, Homepage: {packageHomepage}'
-                             for packageName, packageLicense, packageHomepage in packagesData]
-            formattedData = '\n'.join(formattedData) + '\n'
-        return formattedData
-
 # --- Menu source translations to uniformize platform and Qt menus
 
 def validateOverride(override):
@@ -1194,7 +995,7 @@ def main():
     logger.debug('-- global symbols created')
 
     if not settings.value('settings/st_firstExecutionAccepted', False):
-        qmlPath = applicationDir / 'Disclaimers.qml'
+        qmlPath = qmlDir / 'Disclaimers.qml'
         engine.load(qmlPath.as_uri())
         splash.hide()
         app.exec()
@@ -1203,11 +1004,11 @@ def main():
         return -1
 
     # opens the QML source and applies necessary translations
-    qmlPath = applicationPath.with_suffix('.qml')
+    qmlPath = qmlDir / 'Cookadream.qml'
     qmlSource = openUTF8Resource(qmlPath)
-    qmlSource = qmlTranslateAllMenus(qmlSource, str(applicationPath.with_suffix('')), platform=PLATFORM_MENUS,
+    qmlSource = qmlTranslateAllMenus(qmlSource, str(qmlPath.with_suffix('')), platform=PLATFORM_MENUS,
                                      sequenceGetter = '' if NATIVE_MENUS_SHORTCUTS == 'N' else 'mksq')
-    # qmlTarget = applicationDir / 'translated_source.qml'
+    # qmlTarget = qmlDir / 'translated_source.qml'
     # with open(qmlTarget , 'wt', encoding='utf-8') as debugSorce:
     #     print(qmlSource, file=debugSorce)
     logger.debug('-- QML source translated')

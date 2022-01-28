@@ -24,8 +24,8 @@ from PySide6.QtQml import QmlElement, QQmlApplicationEngine
 from PySide6.QtQuickControls2 import QQuickStyle
 from PySide6.QtWidgets import QApplication
 
-import style_rc  # pylint: disable=unused-import
-
+from . import style_rc  # pylint: disable=unused-import
+from .version_info import PRODUCT_VERSION
 
 compileSettings = len(sys.argv) > 1 and sys.argv[1] == '--compile'
 
@@ -49,7 +49,7 @@ app = QApplication(sys.argv)
 app.setOrganizationName('eduardovalle.com')
 app.setOrganizationDomain('tests.eduardovalle.com')
 app.setApplicationName(appName)
-app.setApplicationVersion('0.1')
+app.setApplicationVersion(PRODUCT_VERSION)
 
 if compileSettings and QSettings().value('settings_internals/firstExecution'):
     print(f'ERROR: settings active for {appName} in preferences cache', file=sys.stderr)
@@ -57,18 +57,19 @@ if compileSettings and QSettings().value('settings_internals/firstExecution'):
 
 # Application resources
 applicationPath = Path(__file__).resolve(strict=True)
-# imagesDir = applicationPath.parent / 'resources' / 'images'
-applicationPath = Path(__file__).resolve(strict=True)
-imagesDir = applicationPath.parent / 'resources' / 'images'
-fontsDir = applicationPath.parent / 'resources' / 'fonts'
-dataDir = applicationPath.parent / 'resources' / 'data'
+applicationDir = applicationPath.parent.parent
+imagesDir = applicationDir / 'resources' / 'images'
+fontsDir = applicationDir / 'resources' / 'fonts'
+dataDir = applicationDir / 'resources' / 'data'
+textDir = applicationDir / 'resources' / 'text'
+examplesDir = applicationDir / 'resources' / 'examples'
+qmlDir = applicationDir / 'gui'
 
 # Load fonts
 for typeface in ("Roboto-Regular.ttf", "Roboto-Italic.ttf", "Roboto-Medium.ttf", "Roboto-MediumItalic.ttf",
                  "Roboto-Bold.ttf", "Roboto-BoldItalic.ttf",):
     fontPath = str(fontsDir / typeface)
     QFontDatabase.addApplicationFont(fontPath)
-
 
 DEEP_DREAM_ENGINE_DEVICES = [d.name for d in tf.config.list_logical_devices()]
 
@@ -110,7 +111,7 @@ if __name__ == '__main__':
     rootContext.setContextProperty('DIALOG_DEBUG', True)
     print('-- global symbols created')
 
-    qml_path = Path(__file__).parent / 'Preferences.qml'
+    qml_path = qmlDir / 'Preferences.qml'
     engine.load(qml_path)
     if not engine.rootObjects():
         sys.exit(-1)

@@ -20,24 +20,23 @@ For the moment, Cook-a-Dream is only available as this source repository, requir
 
 ## 1.1. General Installation Procedures
 
-1. Check that you have Python 3.8 or 3.9 installed. Cook-a-dream requires Python version at least 3.8, and TensorFlow (the AI Engine used for deep dreaming) is compatible with versions 3.7–3.9.
+1. Check that you have Python 3.8 or 3.9 installed. Cook-a-Dream requires Python version at least 3.8, and TensorFlow (the AI Engine used for deep dreaming) is compatible with versions 3.7–3.9
 
-2. Install [TensorFlow](https://www.tensorflow.org/install/). Special requirements may apply for using hardware acceleration (e.g., CUDA on GPUs).
+2. Install [TensorFlow](https://www.tensorflow.org/install/). Special requirements may apply for using hardware acceleration (e.g., CUDA on GPUs). Cook-a-Dream was developed and tested with version 2.7.0 of TensorFlow
 
-3. Install Cook-a-Dream other two dependencies: [PySide6 / Qt for Python 6](https://wiki.qt.io/Qt_for_Python) and [Pillow](https://pillow.readthedocs.io/en/stable/)
+3. Install Cook-a-Dream other two dependencies: [PySide6 / Qt for Python 6](https://wiki.qt.io/Qt_for_Python) and [Pillow](https://pillow.readthedocs.io/en/stable/). Cook-a-Dream was developed and tested with version 6.2.2 of Qt for Python and version 8.4 of Pillow
 
 4. Download Cook-a-Dream source code
-
 
 ## 1.2. Advice for Specific Systems
 
 ### 1.2.1. Windows without hardware acceleration or with CUDA
 
-Tensorflow is officially supported on Windows 7 or Later.
+TensorFlow is officially supported on Windows 7 or Later.
 
-1. Check that you have Python 3.8 or 3.9 installed. Ensure that your Python is 64-bit. **Warning:** Apparently, installing Python from the Microsoft Store leads to a [cryptic PySide6 bug being unable to load its DLLs](https://bugreports.qt.io/browse/PYSIDE-1245). We tested the system with the Windows Installer of Python 3.9.10 (64-bit) [downloaded from Python.org](https://www.python.org/downloads/windows/). We used the default installation options (which included pip), except for adding Python to PATH, which was not checked by default.
+1. Check that you have Python 3.8 or 3.9 installed. Ensure that your Python is 64-bit. **Warning:** Apparently, installing Python from the Microsoft Store leads to a [cryptic PySide6 bug being unable to load its DLLs](https://bugreports.qt.io/browse/PYSIDE-1245). We tested the system with the Windows Installer of Python 3.9.10 (64-bit) [downloaded from Python.org](https://www.python.org/downloads/windows/). We used the default installation options (which included pip), except for adding Python to PATH, which was not checked by default
 
-1. Install [TensorFlow](https://www.tensorflow.org/install/). For hardware acceleration on an NVIDIA GPU, ensure that you have installed and configured CUDA. Read carefully [TensorFlow setup instructions for GPU](https://www.tensorflow.org/install/gpu), and the [CUDA installation guide for Windows](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/). Acceleration on AMD GPUs for Tensorflow 2 is currently not available. Indicative instructions below are for Tensorflow **without** special regard for acceleration:
+1. Install [TensorFlow](https://www.tensorflow.org/install/). For hardware acceleration on an NVIDIA GPU, ensure that you have installed and configured CUDA. Read carefully [TensorFlow setup instructions for GPU](https://www.tensorflow.org/install/gpu), and the [CUDA installation guide for Windows](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/). Acceleration on AMD GPUs for Tensorflow 2 is currently not available. Indicative instructions below are for TensorFlow **without** special regard for acceleration:
 
 	- Install the Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017, and 2019.
 		- Go to the [Microsoft Visual C++ downloads](https://support.microsoft.com/help/2977003/the-latest-supported-visual-c-downloads)
@@ -65,17 +64,17 @@ Tensorflow is officially supported on Windows 7 or Later.
 
 1. Download Cook-a-Dream source code
 
-1. Run Cook-a-Dream. (Remember to activate the virtual environment — see above — every time).
+1. Run Cook-a-Dream. (Remember to activate the virtual environment — see above — every time)
 
-	```python cookadream\Cookadream.py```
+	```python cookadream\cookadream.py```
 
 ### 1.2.1. Linux without hardware acceleration or with CUDA
 
-Tensorflow is officially supported on Ubuntu 16.04 or later, but users report successful installation in other distros.
+TensorFlow is officially supported on Ubuntu 16.04 or later, but users report successful installation in other distros.
 
 1. Check that you have Python 3.8 or 3.9 installed. Otherwise, use the package manager of your system (e.g., apt on Ubuntu) to install it
 
-1. For hardware acceleration, ensure that you have installed and configured CUDA. Read carefully [TensorFlow setup instructions for GPU](https://www.tensorflow.org/install/gpu). Cook-a-Dream was developed and tested with Tensorflow 2.7.0
+1. For hardware acceleration, ensure that you have installed and configured CUDA. Read carefully [TensorFlow setup instructions for GPU](https://www.tensorflow.org/install/gpu). Cook-a-Dream was developed and tested with TensorFlow 2.7.0
 
 1. Install Cook-a-Dream other dependencies PySide6 and Pillow:
 
@@ -85,7 +84,7 @@ Tensorflow is officially supported on Ubuntu 16.04 or later, but users report su
 
 1. Run Cook-a-Dream
 
-	```python cookadream/Cookadream.py```
+	```python cookadream/cookadream.py```
 
 We tested Cook-a-Dream on an Ubuntu 20.04.3 server with acceleration with NVIDIA TITAN Xp GPUs. In our tests, we ran Cook-a-Dream remotely, using [X11 forwarding](https://en.wikipedia.org/wiki/X_Window_System#Remote_desktop). The solutions to the challenges we found to run Qt in that environment are collected in the [x11.environ] file.
 
@@ -95,9 +94,9 @@ We tested Cook-a-Dream on an Ubuntu 20.04.3 server with acceleration with NVIDIA
 
 	```brew install python@3.8```
 
-1. For using hardware acceleration, you need to install the [Tensorflow-Metal plugin](https://developer.apple.com/metal/tensorflow-plugin/). Follow the link and read the instructions carefully, for they are different depending on whether you are using an AMD GPU on Intel or an Accelerated arm64 on Apple Silicon. We developed and tested Cook-a-Dream on an iMac with an AMD Radeon Pro GPU. Indicative instructions for that hardware are below:
+1. For using hardware acceleration, you need to install the [TensorFlow-Metal plugin](https://developer.apple.com/metal/tensorflow-plugin/). Follow the link and read the instructions carefully, for they are different depending on whether you are using an AMD GPU on Intel or an Accelerated arm64 on Apple Silicon. We developed and tested Cook-a-Dream on an iMac with an AMD Radeon Pro GPU. Indicative instructions for that hardware are below:
 
-	- Upgrade pip and create a virtual environment to install TensorFlow. (**Warning**: Apple recommends virtual environments for Tensorflow-Metal only on Intel CPU/AMD GPU. For M1 / Apple Silicon, they recommend conda). Type the following commands on a Terminal shell:
+	- Upgrade pip and create a virtual environment to install TensorFlow. (**Warning**: Apple recommends virtual environments for TensorFlow-Metal only on Intel CPU/AMD GPU. For M1 / Apple Silicon, they recommend conda). Type the following commands on a Terminal shell:
       ```
       python -m pip install --upgrade pip
       python -m pip install --upgrade virtualenv
@@ -122,9 +121,9 @@ We tested Cook-a-Dream on an Ubuntu 20.04.3 server with acceleration with NVIDIA
 
 1. Download Cook-a-Dream source code
 
-1. Run Cook-a-Dream. (Remember to activate the virtual environment — see above — every time).
+1. Run Cook-a-Dream. (Remember to activate the virtual environment — see above — every time)
 
-	```python cookadream/Cookadream.py```
+	```python cookadream/cookadream.py```
 
 **Known issues:** Tiled rendering (which is required for rendering with the last layer of the networks) does not work with current TensorFlow / Tensor-Metal. The issue seems to be related to an [overzealous memory alignment check in TensorFlow](https://github.com/tensorflow/tensorflow/issues/49202).
 
@@ -132,9 +131,9 @@ We tested Cook-a-Dream on an Ubuntu 20.04.3 server with acceleration with NVIDIA
 
 As of 2022-01, [ROCm support on TensorFlow is incipient](https://github.com/ROCmSoftwarePlatform/tensorflow-upstream), and, in particular, not available for Windows.
 
-Microsoft has created [their own port of Tensorflow for DirectX](https://github.com/microsoft/tensorflow-directml), but it is only compatible with TensorFlow 1.
+Microsoft has created [their own port of TensorFlow for DirectX](https://github.com/microsoft/tensorflow-directml), but it is only compatible with TensorFlow 1.
 
-Apple does not support acceleration with  Intel or NVIDIA GPUs.
+Apple does not support acceleration with Intel or NVIDIA GPUs.
 
 ## 1.3. Downloading and running the source
 
@@ -143,15 +142,15 @@ With the dependencies installed, one option is to clone this repository on the i
 ```
 git clone https://github.com/dreavjr/cookadream.git
 cd cookadream
-python Cookadream.py
+python cookadream.py
 ```
 
-If you don't have ```git`` installed, you may download the [source from a release](https://github.com/dreavjr/cookadream/releases), and unzip / untar it on the location, using the graphical interface or one of the sequences below:
+If you don't have ```git``` installed, you may download the [source from a release](https://github.com/dreavjr/cookadream/releases), and unzip / untar it on the location, using the graphical interface, or one of the sequences below in the command-line:
 
 ```
 unzip cookadream-0.1.0.zip
 cd cookadream-0.1.0
-python Cookadream.py
+python cookadream.py
 ```
 
 or
@@ -159,13 +158,13 @@ or
 ```
 tar xvzf cookadream-0.1.0.tar.gz
 cd cookadream-0.1.0
-python Cookadream.py
+python cookadream.py
 ```
 
 # 2. Running Cook-a-Dream
 
-To run Cook-a-Dream, execute the main script ```Cookadream.py```on the command line:
+To run Cook-a-Dream, execute the main script ```cookadream.py```on the command line:
 
-```python Cookadream.py```
+```python cookadream.py```
 
 Cook-a-Dream usage intends to be intuitive. Basic usage is straightforward: just drag and drop an image to the main window, paste an image with the usual Paste shortcut key sequence for the system (normally ctrl+V or cmd+V), or open an image using the menu File->Open... Advanced options are accessible using the Preferences menu.

@@ -1,7 +1,0 @@
-- Preferences.qml
-    - Make the settings/persistence mechanism more generic? Each settings element could have a property alias settings (or settings_1, _2 etc) tha I could make automatically persistent and resettable ( = undefined on QML apparently does the drick, otherwise .reset() on the QProperty)
-
-
-=> Check this!
-
-    - https://pair-code.github.io/interpretability/text-dream/explainable/featurevis

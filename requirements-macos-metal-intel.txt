@@ -1,0 +1,4 @@
+tensorflow-macos==2.7.0
+tensorflow-metal==0.3
+pyside6==6.2.2
+pillow==8.4
