@@ -5,7 +5,7 @@
 Alexander Mordvintsev, Christopher Olah, and Mike Tyka. Google AI Blog, 2015-06-17. \
 https://ai.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html
 
-## Cook-a-Dream is based on Tensorflow tutorials:
+## Cook-a-Dream is based on TensorFlow tutorials:
 https://www.tensorflow.org/tutorials/generative/deepdream \
 https://www.tensorflow.org/tutorials/generative/style_transfer
 
@@ -14,7 +14,7 @@ https://www.tensorflow.org/tutorials/generative/style_transfer
 > http://www.apache.org/licenses
 
 ## The noisy image generator and the ReLU warmup procedure are based on:
-https://github.com/tensorflow/lucid
+https://github.com/TensorFlow/lucid
 
 > Apache License\
 > Version 2.0, January 2004\
@@ -28,11 +28,12 @@ https://distill.pub/2017/feature-visualization/
 Feature visualization is the earnest sibling to light-hearted deep dreaming, but the implementation techniques are surprisingly similar.
 
 ## In the course of developing this program, the author found the following tutorial helpful:
-The idea of blending the octaves with the original image was based on this example.
 
 "Deep Dream with TensorFlow: A Practical guide to build your first Deep Dream Experience" \
 Naveen Manwani. Hackernoon, 2018-12-27. \
 https://hackernoon.com/deep-dream-with-tensorflow-a-practical-guide-to-build-your-first-deep-dream-experience-f91df601f479
+
+The idea of blending the octaves with the original image was based on this example.
 
 # Main software components
 
@@ -97,6 +98,10 @@ https://www.python.org/
 
 > Python software and documentation are licensed under the PSF License Agreement.\
 > https://docs.python.org/3/license.html
+
+## MenuFit.qml
+
+The auto-sizing code for QML native menus is adapted from [this blog post by Martin Hoeher](https://martin.rpdev.net/2018/03/13/qt-quick-controls-2-automatically-set-the-width-of-menus.html), who has kindly released his solution to public domain.
 
 # Other components
 

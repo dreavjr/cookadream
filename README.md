@@ -1,6 +1,6 @@
 <img src="README.png" alt="Cook-a-Dream Header" style="width: 100%;"/>
 
-Cook-a-Dream wraps an interactive, user-friendly interface around [deep dreaming](https://ai.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html). It aims to unleash the creative and [pedagogical](https://distill.pub/2017/feature-visualization/) potentials of deep dreaming for non-technical users.
+Cook-a-Dream wraps an interactive, user-friendly interface around [deep dreaming](https://ai.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html). It aims to unleash the creative and [pedagogic](https://distill.pub/2017/feature-visualization/) potentials of deep dreaming for non-technical users.
 
 Deep Dreaming uses Artificial Intelligence to create or modify images. It optimizes images to “superexcite” certain parts of an artificial neural network specialized in recognizing categories of objects. The process compares to dreaming, or maybe to visual hallucinations in humans.
 
@@ -86,7 +86,7 @@ TensorFlow is officially supported on Ubuntu 16.04 or later, but users report su
 
 	```python cookadream/cookadream.py```
 
-We tested Cook-a-Dream on an Ubuntu 20.04.3 server with acceleration with NVIDIA TITAN Xp GPUs. In our tests, we ran Cook-a-Dream remotely, using [X11 forwarding](https://en.wikipedia.org/wiki/X_Window_System#Remote_desktop). The solutions to the challenges we found to run Qt in that environment are collected in the [x11.environ] file.
+We tested Cook-a-Dream on an Ubuntu 20.04.3 server with acceleration with NVIDIA TITAN Xp GPUs. In our tests, we ran Cook-a-Dream remotely, using [X11 forwarding](https://en.wikipedia.org/wiki/X_Window_System#Remote_desktop). The solutions to the challenges we found to run Qt in that environment are collected in the [x11.environ](x11.environ) file.
 
 
 ### 1.2.2. macOS
