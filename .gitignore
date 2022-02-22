@@ -1,4 +1,5 @@
-# Custom - my locations for secrets
+# Custom - model weights
+**/weights/*.h5
 # ldir configuration files
 .conda
 .virtualenv

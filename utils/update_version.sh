@@ -33,7 +33,7 @@ version="$(git describe --tags --abbrev=0)"
 destackd
 
 if [ "$dry" == "N" ]; then
-    output="utils/version_info.py"
+    output="src/cookadream/utils/version_info.py"
 else
     output="/dev/stdout"
 fi

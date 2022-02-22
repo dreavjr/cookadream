@@ -21,7 +21,7 @@ from pathlib import Path, PurePath
 from PySide6.QtGui import QFontDatabase, QIcon, QKeySequence, QPixmap
 from PySide6.QtWidgets import QApplication, QSplashScreen
 
-from utils.version_info import PRODUCT_VERSION
+from cookadream.utils.version_info import PRODUCT_VERSION
 
 appName = 'Cook-a-Dream'
 app = QApplication(sys.argv)
@@ -38,6 +38,7 @@ fontsDir = applicationDir / 'resources' / 'fonts'
 dataDir = applicationDir / 'resources' / 'data'
 textDir = applicationDir / 'resources' / 'text'
 examplesDir = applicationDir / 'resources' / 'examples'
+modelWeightsDir = applicationDir / 'resources' / 'weights'
 qmlDir = applicationDir / 'gui'
 
 # Application appearance
@@ -63,10 +64,12 @@ splashShow('loading ui framework')
 
 # --- Remaining imports
 import atexit
+import glob
 import inspect
 import logging
 import os
 import re
+import site
 import tempfile
 import traceback
 from datetime import datetime
@@ -77,12 +80,12 @@ from PySide6.QtQml import QmlElement, QQmlApplicationEngine
 from PySide6.QtQuick import QQuickImageProvider, QQuickItem
 from PySide6.QtQuickControls2 import QQuickStyle
 
-from utils import style_rc  # pylint: disable=unused-import
+from cookadream.utils import style_rc  # pylint: disable=unused-import
 
 LOG_ERROR_LEVELS = ('debug', 'info', 'warning', 'error')
 LOG_ERROR_LEVELS_PYTHON = tuple((getattr(logging, l.upper()) for l in LOG_ERROR_LEVELS))
 LOG_ERROR_LEVELS_TF = ('0', '0', '1', '2') # Set to 3 to ommit all messages including error
-LOG_ERROR_LEVEL_DEF = 'info' # Change to warning in final version
+LOG_ERROR_LEVEL_DEF = 'info'
 LOG_ERROR_LEVEL = os.environ.get('COOKADREAM_LOG_ERROR_LEVEL', LOG_ERROR_LEVEL_DEF)
 if LOG_ERROR_LEVEL not in LOG_ERROR_LEVELS:
     print(f'WARNING: LOG_ERROR_LEVEL is not {LOG_ERROR_LEVELS} --- ignoring', file=sys.stderr)
@@ -91,52 +94,66 @@ LOG_ERROR_LEVEL_PYTHON = LOG_ERROR_LEVELS_PYTHON[LOG_ERROR_LEVELS.index(LOG_ERRO
 LOG_ERROR_LEVEL_TF = LOG_ERROR_LEVELS_TF[LOG_ERROR_LEVELS.index(LOG_ERROR_LEVEL)]
 
 LOG_ERROR_MODES = ('debug', 'production')
-LOG_ERROR_MODE_DEF = 'debug' # Change to production in final version
+LOG_ERROR_MODE_DEF = 'production'
 LOG_ERROR_MODE = os.environ.get('COOKADREAM_LOG_ERROR_MODE', LOG_ERROR_MODE_DEF)
 if LOG_ERROR_MODE not in LOG_ERROR_MODES:
     print(f'WARNING: LOG_ERROR_MODE is not {LOG_ERROR_MODES} --- ignoring', file=sys.stderr)
     LOG_ERROR_MODE = LOG_ERROR_MODE_DEF
 
+def deleteOldest(dir, /, *, prefix, suffix, keep=4):
+    path = Path(dir) / f'{prefix}*{suffix}'
+    files = glob.glob(str(path))
+    if len(files) > keep:
+        for f in sorted(files, key=os.path.getctime, reverse=True)[keep:]:
+            os.remove(f)
+
 if LOG_ERROR_MODE == 'debug':
     logWrite = sys.stderr
     logRead = None
     logTFPath = None
+    os.environ.pop('TF_CPP_VLOG_FILENAME', None)
 else:
-    logFileHandle, logPath = tempfile.mkstemp(suffix='.log', prefix='cookadream_main_')
+    logDir = Path(QStandardPaths.writableLocation(QStandardPaths.AppLocalDataLocation))
+    os.makedirs(logDir, exist_ok=True)
+    logPrefix = 'cookadream_main_'
+    logTFPrefix = 'cookadream_tf_'
+    deleteOldest(logDir, prefix=logPrefix, suffix='.log')
+    deleteOldest(logDir, prefix=logTFPrefix, suffix='.log')
+    logFileHandle, logPath = tempfile.mkstemp(prefix=logPrefix, suffix='.log', dir=logDir)
+    logTFFileHandle, logTFPath = tempfile.mkstemp(prefix=logTFPrefix, suffix='.log', dir=logDir)
     os.close(logFileHandle)
+    os.close(logTFFileHandle)
     logWrite = open(logPath, mode='w', encoding='utf-8', errors='replace')
     logRead  = open(logPath, mode='r', encoding='utf-8')
-    print(logPath)
-    def deleteLog():
-        def discardException(routine):
-            try:
-                routine()
-            except Exception as e: # pylint: disable=broad-except
-                print('exception ignored in atexit.deleteLog():', str(e), sys.stderr)
-        discardException(logWrite.close)
-        discardException(logRead.close)
-        discardException(lambda: os.unlink(logPath))
-    atexit.register(deleteLog)
+    os.environ['TF_CPP_VLOG_FILENAME'] = logTFPath
 
-# os.environ.pop('TF_CPP_VLOG_FILENAME', None)
-# os.environ.pop('TF_CPP_MIN_LOG_LEVEL', None)
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = LOG_ERROR_LEVEL_TF
 
 #... loads tensorflow and associate libraries
 splashShow('loading ai framework')
 
-import numpy as np  # pylint: disable=unused-import
 import PIL.Image
 import PIL.ImageOps
 import PIL.ImageQt
-import tensorflow as tf  # pylint: disable=unused-import
 
 if LOG_ERROR_MODE == 'debug':
     LOG_FORMAT = '%(asctime)s: %(levelname)s %(filename)s..%(funcName)s:%(lineno)d] %(message)s'
 else:
-    LOG_FORMAT = '%(asctime)s: %(levelname)s %(pathname)s:%(lineno)d] %(message)s'
+    LOG_FORMAT = '%(asctime)s: %(levelname)s %(filename)s:%(lineno)d] %(message)s'
 
 LOG_DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+
+def sameStream(stream1, stream2):
+    if sameStream.filenoSupported:
+        try:
+            return stream1.fileno() == stream2.fileno()
+        except OSError:
+            sameStream.filenoSupported = False
+            return sameStream(stream1, stream2)
+    else:
+        return stream1 == stream2
+sameStream.filenoSupported = True
 
 def configureLoggers():
     logFormat = logging.Formatter(LOG_FORMAT, datefmt=LOG_DATE_FORMAT)
@@ -145,10 +162,10 @@ def configureLoggers():
         visibleHandlers = []
         priorityHandler = None
         for h in l.handlers if hasattr(l, 'handlers') else []:
-            if isinstance(h, logging.StreamHandler) and h.stream.fileno() == sys.stderr.fileno():
+            if isinstance(h, logging.StreamHandler) and sameStream(h.stream, sys.stderr):
                 visibleHandlers.append(h)
                 priorityHandler = h
-            elif isinstance(h, logging.StreamHandler) and h.stream.fileno() == sys.stdout.fileno():
+            elif isinstance(h, logging.StreamHandler) and sameStream(h.stream, sys.stdout):
                 visibleHandlers.append(h)
         if visibleHandlers:
             priorityHandler = priorityHandler or visibleHandlers[0]
@@ -168,6 +185,31 @@ def configureLoggers():
 
 configureLoggers()
 logger = logging.getLogger('cookadream')
+
+
+# Fix issue with site packages *before* loading tensorflow [BUG: briefcase 0.3.5 Issue #669]
+for p in sys.path:
+    if 'app_packages' in p:
+        site.USER_SITE = p
+        site.ENABLE_USER_SITE = True
+        break
+
+logger.info('sys.abiflags = %s', sys.abiflags)
+logger.info('sys.base_exec_prefix = %s', sys.base_exec_prefix)
+logger.info('sys.base_prefix = %s', sys.base_prefix)
+logger.info('sys.executable = %s', sys.executable)
+logger.info('sys.flags = %s', sys.flags)
+logger.info('sys.float_info = %s', sys.float_info)
+logger.info('sys.implementation = %s', sys.implementation)
+logger.info('sys.path = %s', sys.path)
+logger.info('sys.platform = %s', sys.platform)
+logger.info('sys.prefix = %s', sys.prefix)
+logger.info('sys.version = %s', sys.version)
+logger.info('sys.version_info = %s', sys.version_info)
+logger.info('site.ENABLE_USER_SITE = %s', site.ENABLE_USER_SITE)
+logger.info('site.USER_SITE = %s', site.USER_SITE)
+logger.info('site.getsitepackages = %s', site.getsitepackages())
+logger.info('site.getusersitepackages = %s', site.getusersitepackages())
 
 def logAndFormatException(etype, evalue, trace):
     errorDescription = traceback.format_exception(etype, evalue, trace)
@@ -222,9 +264,13 @@ logger.debug('loggers configured')
 # Licensed under the Apache License, Version 2.0
 splashShow('initializing ai engine')
 
-from deep_dream import DEEP_DREAM_ENGINE_DEVICES
-from deep_dream import MIN_DIM as MINIMUM_DREAM_IMAGE_SIZE
-from deep_dream import DeepDreamEngine
+os.environ['COOKADREAM_MODEL_WEIGHTS_DIR'] = str(modelWeightsDir)
+import cookadream.deep_dream_patch_and_load
+
+import numpy as np
+
+from cookadream.deep_dream import MIN_DIM as MINIMUM_DREAM_IMAGE_SIZE
+from cookadream.deep_dream import DEEP_DREAM_ENGINE_DEVICES, DeepDreamEngine
 
 deepDreamEngine = DeepDreamEngine()
 
@@ -245,7 +291,7 @@ class DreamEngineInfo(QObject):
 # --- Multithreading infra-structure
 splashShow('initializing ui')
 
-from utils import about_info
+from cookadream.utils import about_info
 
 about_info.configureAboutInfo(applicationObject=app, textDirPathObject=textDir)
 

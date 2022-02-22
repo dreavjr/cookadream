@@ -1,0 +1,43 @@
+[tool.briefcase]
+project_name = "Cook-a-Dream"
+bundle = "com.eduardovalle"
+version = "0.0.1"
+url = "https://eduardovalle.com/cookadream"
+license = "GNU General Public License v3 (GPLv3)"
+author = 'Eduardo Valle'
+author_email = "cookadream@eduardovalle.com"
+
+[tool.briefcase.app.cookadream]
+formal_name = "Cook-a-Dream"
+description = "A user-friendly approach to deep dreaming"
+icon = "src/cookadream/resources/images/application_icon"
+sources = ['src/cookadream']
+requires = [
+    'pyside6==6.2.2',
+    'pillow==8.4',
+]
+
+
+[tool.briefcase.app.cookadream.macOS]
+requires = [
+    'tensorflow-macos==2.8.0',
+    'tensorflow-metal==0.3',
+]
+
+[tool.briefcase.app.cookadream.linux]
+requires = [
+    'tensorflow==2.7.0',
+]
+system_requires = []
+
+[tool.briefcase.app.cookadream.windows]
+requires = [
+    'tensorflow==2.7.0',
+]
+
+# Mobile deployments
+[tool.briefcase.app.cookadream.iOS]
+requires = []
+
+[tool.briefcase.app.cookadream.android]
+requires = []
