@@ -14,19 +14,19 @@ You should have received a copy of the GNU General Public License along with Coo
 Alexander Mordvintsev, Christopher Olah, and Mike Tyka. Google AI Blog, 2015-06-17. \
 https://ai.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html
 
-## Cook-a-Dream is based on Tensorflow tutorials:
+## Cook-a-Dream is based on TensorFlow tutorials:
 https://www.tensorflow.org/tutorials/generative/deepdream \
 https://www.tensorflow.org/tutorials/generative/style_transfer
 
-> Apache License
-> Version 2.0, January 2004
+> Apache License\
+> Version 2.0, January 2004\
 > http://www.apache.org/licenses
 
 ## The noisy image generator and the ReLU warmup procedure are based on:
-https://github.com/tensorflow/lucid
+https://github.com/TensorFlow/lucid
 
-> Apache License
-> Version 2.0, January 2004
+> Apache License\
+> Version 2.0, January 2004\
 > http://www.apache.org/licenses/
 
 ## In the course of developing this program, the author consulted the companion article of Lucid several times:
@@ -36,12 +36,13 @@ https://distill.pub/2017/feature-visualization/
 
 Feature visualization is the earnest sibling to light-hearted deep dreaming, but the implementation techniques are surprisingly similar.
 
-## In the course of of developing this program, the author found the following tutorial helpful:
-The idea of blending the octaves with the original image was based on this example.
+## In the course of developing this program, the author found the following tutorial helpful:
 
 "Deep Dream with TensorFlow: A Practical guide to build your first Deep Dream Experience" \
 Naveen Manwani. Hackernoon, 2018-12-27. \
 https://hackernoon.com/deep-dream-with-tensorflow-a-practical-guide-to-build-your-first-deep-dream-experience-f91df601f479
+
+The idea of blending the octaves with the original image was based on this example.
 
 # Main software components
 
@@ -65,9 +66,24 @@ https://doc.qt.io/qt-6/qtwidgets-index.html
 
 https://www.tensorflow.org/
 
-> Apache License
-> Version 2.0, January 2004
+> Apache License\
+> Version 2.0, January 2004\
 > http://www.apache.org/licenses/
+
+## Cook-a-Dream is packaged for distribution with Briefcase
+
+https://beeware.org/briefcase/
+
+> Copyright (c) 2015 Russell Keith-Magee.\
+> All rights reserved.
+>
+> Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+>
+> * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+> * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+> * Neither the name of Briefcase nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+>
+> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Other software components
 
@@ -75,22 +91,25 @@ https://www.tensorflow.org/
 
 https://numpy.org/
 
-> NumPy License
+> NumPy License\
 > https://numpy.org/doc/stable/license.html
 >
-> Copyright (c) 2005-2022, NumPy Developers.
+> Copyright (c) 2005-2022, NumPy Developers.\
 > All rights reserved.
 >
 > Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+>
 > * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
 > * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 > * Neither the name of the NumPy Developers nor the names of any contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+>
+> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Pillow
 
 https://python-pillow.org/
 
-> HPND License
+> HPND License\
 > https://github.com/python-pillow/Pillow/blob/main/LICENSE
 >
 > Like PIL, Pillow is licensed under the open source HPND License:
@@ -103,8 +122,12 @@ https://python-pillow.org/
 
 https://www.python.org/
 
-> Python software and documentation are licensed under the PSF License Agreement.
+> Python software and documentation are licensed under the PSF License Agreement.\
 > https://docs.python.org/3/license.html
+
+## MenuFit.qml
+
+The auto-sizing code for QML native menus is adapted from [this blog post by Martin Hoeher](https://martin.rpdev.net/2018/03/13/qt-quick-controls-2-automatically-set-the-width-of-menus.html), who has kindly released his solution to public domain.
 
 # Other components
 
@@ -140,7 +163,7 @@ placeholder.*, Copyright Eduardo Valle, 2022
 ## Application icon and splash screen
 
 The application icon and splash screen are based on the image "Artichoke by Jean Bernard (1775-1883)", Wikimedia Commons. CC-BY-SA-4.0. \
-Original from the Rijks Museum. \
+Original from the Rijksmuseum Amsterdam. \
 https://commons.wikimedia.org/wiki/File:Illustration_by_Jean_Bernard,_digitally_enhanced_by_rawpixel-com_292.jpg
 
 

@@ -100,6 +100,7 @@ def emitText(text, formatName):
     emit(text, 3)
 
 def formatText(text):
+    text = text[:-1] if text[-1:] == '\\' else text
     text = matchBold.sub(r'<b>\1</b>', text)
     text = matchItalics.sub(r'<i>\1</i>', text)
     text = matchLink.sub(r'<a style="text-decoration:none" href="\1">\1</a>', text)
@@ -137,9 +138,9 @@ for lft in lightformatText:
     licenseText = emitAccumulated(licenseText, 'license')
     if bodyText:
         bodyText += '<br/>'
-    bodyTextContinues = lft[-1:] == '\\'
-    newBodyText = lft[:-1] if bodyTextContinues else lft
+    newBodyText = lft
     bodyText += formatText(newBodyText)
+    bodyTextContinues = newBodyText[-1:] == '\\'
     if not bodyTextContinues:
         bodyText = emitAccumulated(bodyText, 'body')
 
