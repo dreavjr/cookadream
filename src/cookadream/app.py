@@ -33,13 +33,13 @@ app.setApplicationVersion(PRODUCT_VERSION)
 # Application resources
 applicationPath = Path(__file__).resolve(strict=True)
 applicationDir = applicationPath.parent
-imagesDir = applicationDir / 'resources' / 'images'
-fontsDir = applicationDir / 'resources' / 'fonts'
-dataDir = applicationDir / 'resources' / 'data'
-textDir = applicationDir / 'resources' / 'text'
-examplesDir = applicationDir / 'resources' / 'examples'
-modelWeightsDir = applicationDir / 'resources' / 'weights'
 qmlDir = applicationDir / 'gui'
+resourcesDir = applicationDir / 'resources'
+imagesDir = resourcesDir / 'images'
+fontsDir = resourcesDir / 'fonts'
+dataDir = resourcesDir / 'data'
+textDir = resourcesDir / 'text'
+examplesDir = resourcesDir / 'examples'
 
 # Application appearance
 app.setWindowIcon(QIcon(str(imagesDir / 'application_icon.png')))
@@ -194,7 +194,7 @@ for p in sys.path:
         site.ENABLE_USER_SITE = True
         break
 
-logger.info('sys.abiflags = %s', sys.abiflags)
+logger.info('sys.abiflags = %s', getattr(sys, 'abiflags', None))
 logger.info('sys.base_exec_prefix = %s', sys.base_exec_prefix)
 logger.info('sys.base_prefix = %s', sys.base_prefix)
 logger.info('sys.executable = %s', sys.executable)
@@ -264,7 +264,7 @@ logger.debug('loggers configured')
 # Licensed under the Apache License, Version 2.0
 splashShow('initializing ai engine')
 
-os.environ['COOKADREAM_MODEL_WEIGHTS_DIR'] = str(modelWeightsDir)
+os.environ['COOKADREAM_RESOURCES_DIR'] = str(resourcesDir)
 import cookadream.deep_dream_patch_and_load
 
 import numpy as np

@@ -1,7 +1,7 @@
 [tool.briefcase]
 project_name = "Cook-a-Dream"
 bundle = "com.eduardovalle"
-version = "0.0.1"
+version = "0.2.0"
 url = "https://eduardovalle.com/cookadream"
 license = "GNU General Public License v3 (GPLv3)"
 author = 'Eduardo Valle'

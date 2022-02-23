@@ -1,0 +1,1 @@
+For CUDA support, the CUDNN library should be installed in this directory.

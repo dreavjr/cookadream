@@ -15,17 +15,43 @@
 # pylint: disable=invalid-name
 # This module uses TensorFlow (instead of Qt) naming conventions
 import logging
+import glob
 import os
 from pathlib import Path
+
+logger = logging.getLogger('deep_dream')
+
+weights_path = Path(os.environ['COOKADREAM_RESOURCES_DIR']) / 'weights'
+libs_path = Path(os.environ['COOKADREAM_RESOURCES_DIR']) / 'libs'
+
+if os.name == 'nt':
+    # In Windows, tries to find cuda installation
+    system_drive = os.environ['SystemDrive']
+    cuda_path = glob.glob(f'{system_drive}\\Program Files*\\**\\CUDA\\v11.2\\bin')
+    if cuda_path:
+        # Found it! Adjusts system paths
+        cuda_path_bin = cuda_path[0]
+        cuda_path = Path(cuda_path[0]).parent
+        cuda_path_cupti = str(cuda_path / 'extras' / 'CUPTI' / 'lib64')
+        system_path = os.environ.get('PATH', '')
+        system_paths = system_path.split(';') if system_path else []
+        while cuda_path_cupti in system_paths:
+            system_paths.remove(cuda_path_cupti)
+        while cuda_path_bin in system_paths:
+            system_paths.remove(cuda_path_bin)
+        system_paths.insert(0,  str(libs_path)) # CUDNN path
+        system_paths.insert(0,  cuda_path_cupti)
+        system_paths.insert(0,  cuda_path_bin)
+        system_path = ';'.join(system_paths)
+        os.environ['PATH'] = system_path
+        logger.debug('CUDA v11.2 found! system_path = %s', system_path)
+    else:
+        logger.debug('CUDA v11.2 not found!')
 
 import numpy as np
 from tensorflow.python.keras.utils import data_utils
 from keras.utils import data_utils as data_utils_k
 from tensorflow.python.util.tf_export import keras_export
-
-logger = logging.getLogger('deep_dream')
-
-weights_path = Path(os.environ['COOKADREAM_MODEL_WEIGHTS_DIR'])
 
 keras_get_file = data_utils.get_file
 keras_get_file_k = data_utils_k.get_file
