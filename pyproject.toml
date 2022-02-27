@@ -26,13 +26,13 @@ requires = [
 
 [tool.briefcase.app.cookadream.linux]
 requires = [
-    'tensorflow==2.7.0',
+    'tensorflow==2.8.0',
 ]
 system_requires = []
 
 [tool.briefcase.app.cookadream.windows]
 requires = [
-    'tensorflow==2.7.0',
+    'tensorflow==2.8.0',
 ]
 
 # Mobile deployments

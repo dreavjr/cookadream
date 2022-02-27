@@ -68,15 +68,15 @@ ApplicationWindow {
         property string saveFolderUri
     }
 
-    readonly property real extraHeight: (menuBar ? menuBar.height : 0)
-    readonly property real extraWidth: 0
-    readonly property real imageHeight: (height - extraHeight)
-    readonly property real imageWidth: (width - extraWidth)
+    readonly property real extraHeight: (height-contentItem.height)
+    readonly property real extraWidth: (width-contentItem.width)
+    readonly property real imageHeight: contentItem.height
+    readonly property real imageWidth: contentItem.width
 
     function resize(w, h) {
         let W = Screen.desktopAvailableWidth
         let H = Screen.desktopAvailableHeight
-        console.debug('desktop =', W, H, 'new size =', w, h, 'extra =', extraWidth, extraHeight)
+        console.debug('desktop =', W, H, 'chosen size =', w, h, 'extra =', extraWidth, extraHeight)
         w += extraWidth
         h += extraHeight
         // if image does not fit, computes the maximum size with right ratio
@@ -99,6 +99,7 @@ ApplicationWindow {
         mainwindow.y = Math.min(mainwindow.y, H-h)
         mainwindow.width = w
         mainwindow.height = h
+        console.debug('computed size =', w, h, 'new size =', mainwindow.width, mainwindow.height)
     }
 
     // --- Main connections
@@ -125,7 +126,7 @@ ApplicationWindow {
     }
 
     // --- UI Actions and menus
-    // Used accelerators: a c d e f h i k l n m o p q r s w
+    // Used accelerators: a c d e f h i k l n m o p q r s w x
     KeySequences {
         id: mksq
     }
@@ -201,6 +202,19 @@ ApplicationWindow {
         enabled: bridge.ready
         onTriggered: {
             opendialog.folder = settingspaths.openFolderUri;
+            opendialog.saveFolderOnClose = true;
+            console.debug('opendialog.folder =', opendialog.folder,
+                          'settingspaths.openFolderUri =', settingspaths.openFolderUri)
+            opendialog.open()
+        }
+    }
+    Action {
+        id: exampleaction
+        text: qsTr('Open E&xample...')
+        enabled: bridge.ready
+        onTriggered: {
+            opendialog.folder = EXAMPLES_URI;
+            opendialog.saveFolderOnClose = false;
             console.debug('opendialog.folder =', opendialog.folder,
                           'settingspaths.openFolderUri =', settingspaths.openFolderUri)
             opendialog.open()
@@ -427,14 +441,19 @@ ApplicationWindow {
         fileMode: QtPl.FileDialog.OpenFile
         defaultSuffix: bridge.DEFAULT_SUFFIX
         nameFilters: bridge.OPEN_IMAGE_FILTERS
+        property bool saveFolderOnClose: true
         onAccepted: {
             console.debug('file =', file, 'folder =', folder)
-            settingspaths.openFolderUri = folder
+            if (saveFolderOnClose) {
+                settingspaths.openFolderUri = bridge.parentUrl(file)
+            }
             maybeOpenImage(file)
         }
         onRejected: {
             console.debug('folder =', folder)
-            settingspaths.openFolderUri = folder
+            if (saveFolderOnClose) {
+                settingspaths.openFolderUri = folder
+            }
         }
     }
 
@@ -445,7 +464,7 @@ ApplicationWindow {
         nameFilters: bridge.SAVE_IMAGE_FILTERS
         onAccepted: {
             console.debug('file =', file, 'folder =', folder)
-            settingspaths.saveFolderUri = folder
+            settingspaths.saveFolderUri = bridge.parentUrl(file)
             saveImage(file)
         }
         onRejected: {

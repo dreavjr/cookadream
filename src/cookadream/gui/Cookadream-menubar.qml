@@ -4,6 +4,7 @@
         title: qsTr("&File")
         action: newaction
         action: openaction
+        action: exampleaction
         action: saveaction
         @.MenuSeparator{}
         action: quitaction

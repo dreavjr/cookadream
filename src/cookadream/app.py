@@ -625,10 +625,14 @@ class BridgeMainWindow(QObject):
             return str(path)
         return ''
 
-    # --- URL to path conversion
+    # --- URL helpers
     @Slot(str, result=str)
     def urlToPath(_self, url):
         return str(PurePath(QUrl(url).toLocalFile()))
+
+    @Slot(str, result=str)
+    def parentUrl(_self, url):
+        return str(PurePath(QUrl(url).toLocalFile()).parent)
 
     # --- Main functionality
     @Slot(WorkerSignals, int, int, float, int, float, float, float, int)
@@ -840,6 +844,7 @@ class BridgeMainWindow(QObject):
             _errorDescription = logAndFormatException(etype, evalue, trace)
             return False
 
+
 # --- Dynamic image provider for Main window
 
 class NeuralImageBridge(QQuickImageProvider):
@@ -1035,6 +1040,7 @@ def main():
     rootContext.setContextProperty('IMAGES_URI', imagesUri)
     dataUri = dataDir.as_uri()
     rootContext.setContextProperty('DATA_URI', dataUri)
+    rootContext.setContextProperty('EXAMPLES_URI', examplesUri)
     rootContext.setContextProperty('CONTROLS_THEME', CONTROLS_THEME)
     rootContext.setContextProperty('COMPILE_SETTINGS', False)
     rootContext.setContextProperty('DIALOG_DEBUG', False)

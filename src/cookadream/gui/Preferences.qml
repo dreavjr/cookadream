@@ -231,60 +231,6 @@ Window {
             Layout.fillHeight: true
             spacing: Constants.spacing
 
-            // >>>>> Image options
-            GroupBox {
-                Layout.fillWidth: true
-                title: qsTr('Image options:')
-
-                ColumnLayout {
-                    anchors.fill: parent
-                    spacing: Constants.spacing
-
-                    // -- Maximum image size
-                    RowLayout {
-                        spacing: Constants.spacing
-                        Label {
-                            text: qsTr('Maximum image size:')
-                        }
-                        ComboBox {
-                            id: maximumimagesize
-                            implicitContentWidthPolicy: ComboBox.WidestText
-                            currentIndex: 1
-                            textRole: "label"
-                            valueRole: "value"
-                            model: [
-                                    { label: '512',  value: 512 },
-                                    { label: '1024', value: 1024 },
-                                    { label: '2048', value: 2048 },
-                                    { label: qsTr('no limit'), value: 0 },
-                                ]
-                        }
-                    }
-                    WarningText {
-                        text: qsTr('large images may be very slow to render and use more memory than available')
-                        visible: maximumimagesize.currentValue == 0
-                    }
-
-                    // -- Image quality for lossy compressions on save
-                    Label {
-                        text: qsTr('Quality for lossy compression when saving dreams:')
-                    }
-                    IndicatorSlider {
-                        id: imagesavequality
-                        preferredWidth: Constants.slidersSize
-                        from: 0
-                        to: 100
-                        stepSize: 1
-                        value: 85
-                    }
-                    WarningText {
-                        text: qsTr('quality this low will save the images with noticeable distortions')
-                        visible: imagesavequality.value < 50
-                    }
-                }
-            }
-            // <<<<< Image options
-
             // >>>>> AI options
             GroupBox {
                 title: qsTr('AI options:')
@@ -316,11 +262,12 @@ Window {
                     CheckBox {
                         id: tiledrendering
                         text: qsTr('Use tiled rendering')
+                        checkState: Qt.Checked
                         visible: modellayer.value != modellayer.to
                     }
                     WarningText {
-                        text: qsTr('tiled rendering uses less memory and may be faster, but is less compatible with some devices — uncheck if you experience crashes or other issues')
-                        visible: (modellayer.value != modellayer.to && tiledrendering.checkState === Qt.Checked)
+                        text: qsTr('tiled rendering uses less memory and may be faster in some devices')
+                        visible: (tiledrendering.visible && tiledrendering.checkState !== Qt.Checked)
                     }
                     CheckBox {
                         id: tiledrenderingdummy
@@ -330,7 +277,7 @@ Window {
                         visible: !tiledrendering.visible
                     }
                     WarningText {
-                        text: qsTr('tiled rendering is required when using the highest layer, but less compatible with some devices — choose other layer if you experience crashes or other issues')
+                        text: qsTr('tiled rendering is required when using the highest layer')
                         visible: tiledrenderingdummy.visible
                     }
 
@@ -484,39 +431,6 @@ Window {
             }
             // <<<<< AI options
 
-            // >>>>> Buttons: Reset and Reload
-            Rectangle {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.minimumHeight: (resetbutton.height + Constants.padding)
-                color: "transparent"
-                RowLayout {
-                    anchors.left: parent.left
-                    anchors.bottom: parent.bottom
-                    spacing: Constants.spacing
-                    Button {
-                        id: resetbutton
-                        text: qsTr('Reset to defaults')
-                        Layout.alignment: (Qt.AlignBottom | Qt.AlignLeft)
-                        onClicked: internals.reset()
-                    }
-                    Button {
-                        id: reloadbutton
-                        text: qsTr('Reload AI engine')
-                        Layout.alignment: (Qt.AlignBottom | Qt.AlignLeft)
-                        visible: aiSettingsHaveChanged
-                        enabled: (reloadAiEngineAction ? reloadAiEngineAction.enabled : true)
-                        onClicked: {
-                            if (reloadAiEngineAction) {
-                                reloadAiEngineAction.trigger()
-                            }
-                            registerSettings()
-                        }
-                    }
-                }
-            }
-            // <<<<< Buttons: Reset and Reload
-
         }
         // <--------- First Column
 
@@ -606,6 +520,51 @@ Window {
                 }
             }
             // <<<<< Dream options
+
+            // >>>>> Buttons: Reset and Reload
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumHeight: (resetbutton.height + Constants.padding)
+                color: "transparent"
+                RowLayout {
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    // anchors.margins: Constants.padding
+                    spacing: Constants.spacing
+                    Button {
+                        id: resetbutton
+                        text: qsTr('Reset to Defaults')
+                        Layout.alignment: (Qt.AlignBottom | Qt.AlignLeft)
+                        onClicked: internals.reset()
+                    }
+                    Button {
+                        id: reloadbutton
+                        text: qsTr('Apply AI Changes')
+                        Layout.alignment: (Qt.AlignBottom | Qt.AlignLeft)
+                        visible: aiSettingsHaveChanged
+                        highlighted: aiSettingsHaveChanged
+                        enabled: (reloadAiEngineAction ? reloadAiEngineAction.enabled : true)
+                        onClicked: {
+                            if (reloadAiEngineAction) {
+                                reloadAiEngineAction.trigger()
+                            }
+                            registerSettings()
+                        }
+                    }
+                }
+            }
+            // <<<<< Buttons: Reset and Reload
+
+        }
+        // <--------- Second Column
+
+        // ---------> Third Column : Smoothing and Image options
+        ColumnLayout {
+            Layout.alignment: Qt.AlignTop
+            Layout.fillHeight: true
+            spacing: Constants.spacing
+
 
             // >>>>> Dream smoothing
             GroupBox {
@@ -702,7 +661,64 @@ Window {
                 }
             }
             // <<<<< Dream smoothing
+
+
+            // >>>>> Image options
+            GroupBox {
+                Layout.fillWidth: true
+                title: qsTr('Image options:')
+
+                ColumnLayout {
+                    anchors.fill: parent
+                    spacing: Constants.spacing
+
+                    // -- Maximum image size
+                    RowLayout {
+                        spacing: Constants.spacing
+                        Label {
+                            text: qsTr('Maximum image size:')
+                        }
+                        ComboBox {
+                            id: maximumimagesize
+                            implicitContentWidthPolicy: ComboBox.WidestText
+                            currentIndex: 1
+                            textRole: "label"
+                            valueRole: "value"
+                            model: [
+                                    { label: '512',  value: 512 },
+                                    { label: '1024', value: 1024 },
+                                    { label: '2048', value: 2048 },
+                                    { label: qsTr('no limit'), value: 0 },
+                                ]
+                        }
+                    }
+                    WarningText {
+                        text: qsTr('large images may be very slow to render and use more memory than available')
+                        visible: maximumimagesize.currentValue == 0
+                    }
+
+                    // -- Image quality for lossy compressions on save
+                    Label {
+                        text: qsTr('Quality for lossy compression when saving dreams:')
+                    }
+                    IndicatorSlider {
+                        id: imagesavequality
+                        preferredWidth: Constants.slidersSize
+                        from: 0
+                        to: 100
+                        stepSize: 1
+                        value: 85
+                    }
+                    WarningText {
+                        text: qsTr('quality this low will save the images with noticeable distortions')
+                        visible: imagesavequality.value < 50
+                    }
+                }
+            }
+            // <<<<< Image options
+
         }
-        // <--------- Second Column
+        // ---------> Third Column
+
     }
 }

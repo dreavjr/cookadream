@@ -17,6 +17,8 @@
 import logging
 import glob
 import os
+import tempfile
+import sys
 from pathlib import Path
 
 logger = logging.getLogger('deep_dream')
@@ -47,6 +49,12 @@ if os.name == 'nt':
         logger.debug('CUDA v11.2 found! system_path = %s', system_path)
     else:
         logger.debug('CUDA v11.2 not found!')
+
+    # Autograd assumes the existence of the output streams in Tensorflow 2.8.0 [BUG?]
+    if sys.stdout is None:
+        sys.stdout = tempfile.TemporaryFile(mode='w', encoding='utf-8', errors='ignore')
+    if sys.stderr is None:
+        sys.stderr = tempfile.TemporaryFile(mode='w', encoding='utf-8', errors='ignore')
 
 import numpy as np
 from tensorflow.python.keras.utils import data_utils
