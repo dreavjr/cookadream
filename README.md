@@ -16,9 +16,11 @@ For acknowledgments and third-party licenses, check the file [ACKNOWLEDGMENTS.md
 
 I am currently trying to find out how to make Cook-a-Dream installation hassle-free for non-technical users. Unfortunately, that is *much* harder to do in Python than I expected.
 
-For the moment, simplified installation is only available for macOS on Intel machines. On other Operating Systems or on macOS on Apple Sillicon, installation from sources is required (read below).
+For the moment, simplified installation is only available for Window 10+ and for macOS on Intel machines. On other Operating Systems or on macOS on Apple Sillicon, installation from sources is required (read below).
 
-The installation package for macOS is created with [briefcase](https://beeware.org/project/projects/tools/briefcase/).
+You may download the [installation packages here](https://github.com/dreavjr/cookadream/releases/tag/v0.2.0).
+
+The installation packages were created with [Briefcase](https://beeware.org/project/projects/tools/briefcase/).
 
 
 # 2. Installation from Sources
