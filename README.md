@@ -22,6 +22,9 @@ You may download the [installation packages here](https://github.com/dreavjr/coo
 
 The installation packages were created with [Briefcase](https://beeware.org/project/projects/tools/briefcase/).
 
+**For hardware acceleration on Windows,** you have to install, separately, the [NVIDIA CUDA Toolkit v11.2](https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork). You may install it before or after Cook-a-Dream (restart the application in the latter case). You need a CUDA-compatible GPU with enough RAM to accomodate the models. If you experience issues like crashes, disable acceleration by choosing a CPU device on the Preferences pane.
+
+**Known issues:** the Windows installer does not create a shortcut on the Desktop. You may find the application on the Start menu.
 
 # 2. Installation from Sources
 
@@ -187,3 +190,5 @@ python -m cookadream
 ```
 
 Cook-a-Dream usage intends to be intuitive. Basic usage is straightforward: just drag and drop an image to the main window, paste an image with the usual Paste shortcut key sequence for the system (normally ctrl+V or cmd+V), or open an image using the menu File->Open... Advanced options are accessible using the Preferences menu.
+
+A [demonstration video is available](https://youtu.be/KuTNFlT_Kf4).
